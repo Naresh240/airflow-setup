@@ -103,7 +103,13 @@ executor = LocalExecutor
 sql_alchemy_conn = postgresql+psycopg2://airflow_user:airflow_pass@localhost:5432/airflow_db
 ```
 
-6. Create Systemd Service for Airflow for webserver and Airflow scheduler
+6. Upgrade Airflow Database with postgres
+
+```shell
+airflow db init
+```
+
+7. Create Systemd Service for Airflow for webserver and Airflow scheduler
 
 ```shell
 vi /etc/systemd/system/airflow-webserver.service
@@ -140,14 +146,14 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-7. Run Airflow webserver and scheduler
+8. Run Airflow webserver and scheduler
 
 ```shell
 service airflow-scheduler start
 service airflow-webserver start
 ```
 
-8. Create user to login airflow
+9. Create user to login airflow
 
 ```shell
 airflow users create \
@@ -159,7 +165,7 @@ airflow users create \
     --password Naresh#123
 ```
 
-9. Access Airflow login page
+10. Access Airflow login page
 
 ```shell
 http://<IP-Address>:<Port>
