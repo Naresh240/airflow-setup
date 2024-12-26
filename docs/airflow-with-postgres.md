@@ -64,13 +64,13 @@ Pre-Requisites:
 1. Minimum t2.linux server to setup airflow
 2. Install python and pip
 
-1. Installation of python and pip
+- Installation of python and pip
 
 ```shell
 yum install python python-pip -y
 ```
 
-2. Setup python virtual environment for airflow
+1. Setup python virtual environment for airflow
 
 ```shell
 python -m venv awscli-env
@@ -79,7 +79,7 @@ source awscli-env/bin/activate
 pip install awscli
 ```
 
-3. Install Airflow using the constraints file, which is determined based on the URL we pass
+2. Install Airflow using the constraints file, which is determined based on the URL we pass
 
 ```shell
 AIRFLOW_VERSION=2.10.4
@@ -88,13 +88,13 @@ CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${A
 pip install "apache-airflow[postgres]==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
 ```
 
-4. Initialize the Airflow Database
+3. Initialize the Airflow Database
 
 ```shell
 airflow db init
 ```
 
-5. Update ```airflow.cfg``` file for postgres database connection and executors
+4. Update ```airflow.cfg``` file for postgres database connection and executors
 
 ```shell
 vi /root/airflow/airflow.cfg
@@ -103,13 +103,13 @@ executor = LocalExecutor
 sql_alchemy_conn = postgresql+psycopg2://airflow_user:airflow_pass@localhost:5432/airflow_db
 ```
 
-6. Upgrade Airflow Database with postgres
+5. Upgrade Airflow Database with postgres
 
 ```shell
 airflow db init
 ```
 
-7. Create Systemd Service for Airflow for webserver and Airflow scheduler
+6. Create Systemd Service for Airflow for webserver and Airflow scheduler
 
 ```shell
 vi /etc/systemd/system/airflow-webserver.service
@@ -146,14 +146,14 @@ Restart=always
 WantedBy=multi-user.target
 ```
 
-8. Run Airflow webserver and scheduler
+7. Run Airflow webserver and scheduler
 
 ```shell
 service airflow-scheduler start
 service airflow-webserver start
 ```
 
-9. Create user to login airflow
+8. Create user to login airflow
 
 ```shell
 airflow users create \
@@ -165,7 +165,7 @@ airflow users create \
     --password Naresh#123
 ```
 
-10. Access Airflow login page
+9. Access Airflow login page
 
 ```shell
 http://<IP-Address>:<Port>
