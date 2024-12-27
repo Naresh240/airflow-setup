@@ -39,7 +39,9 @@ AIRFLOW_UID=50000
 docker-compose up -d
 ```
 
-```Note:``` Please check directory and file permissions using below commands
+```Note:``` 
+1. Please check directory and file permissions using below commands
+2. Here modules need to add under ```requirements.txt``` file and then restart airflow
 
 ```shell
 chmod 777 dags
