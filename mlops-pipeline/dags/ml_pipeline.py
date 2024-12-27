@@ -12,7 +12,7 @@ def prepare_data():
     import pandas as pd
     print("----------- Inside prepare_data component ------------")
     # Load dataset
-    df = pd.read_csv("https://raw.githubusercontent.com/Naresh240/airflow-setup/refs/heads/main/dataset/iris.csv")
+    df = pd.read_csv("https://raw.githubusercontent.com/Naresh240/airflow-setup/refs/heads/main/mlops-pipeline/dataset/iris.csv")
     df = df.dropna()
     df.to_csv(f'final_df.csv', index=False)
 
