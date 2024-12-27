@@ -1,0 +1,16 @@
+FROM python:3.9-slim
+
+# Set the working directory
+WORKDIR /mlflow
+
+# Install MLflow and any other required dependencies
+RUN pip install --no-cache-dir mlflow
+
+# Set an environment variable for the MLflow backend URI
+ENV BACKEND_URI=""
+ENV ARTIFACT_URI=""
+# Expose the default MLflow UI port
+EXPOSE 5000
+
+# Command to run MLflow UI with the specified backend URI
+CMD ["sh", "-c", "mlflow ui --backend-store-uri ${BACKEND_URI} --default-artifact-root ${ARTIFACT_URI} --host 0.0.0.0"]
