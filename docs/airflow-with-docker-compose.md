@@ -47,3 +47,17 @@ chmod 777 plugins
 chmod 777 logs
 chmod 777 config
 ```
+
+## Login to Airflow
+
+```shell
+# Default credentials
+username: airflow
+password: airflow
+```
+
+![Airflow Login Page](../images/airflow_login.png)
+
+## Checking helloworld dag under Airflow
+
+![Airflow Dag](../images/airflow_helloworld_dag.png)
