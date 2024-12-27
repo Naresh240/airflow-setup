@@ -8,7 +8,7 @@ def hello_world():
 
 # Define the DAG
 dag = DAG(
-    'hello_world',
+    'hello_world', 
     description='A simple Hello World DAG',
     schedule_interval=None,  # No automatic scheduling
     start_date=datetime(2024, 12, 26), 

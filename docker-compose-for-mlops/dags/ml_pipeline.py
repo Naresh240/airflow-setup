@@ -31,7 +31,7 @@ def train_test_split():
     np.save(f'x_train.npy', x_train)
     np.save(f'x_test.npy', x_test)
     np.save(f'y_train.npy', y_train)
-    np.save(f'x_test.npy', x_test)
+    np.save(f'y_test.npy', y_test)
 
     print("\n --------- x_train ---------")
     print("\n")
@@ -53,27 +53,27 @@ def training_basic_classifier():
     
     print("---- Inside training_basic_classifier component ----")
     
-    X_train = np.load(f'data/X_train.npy',allow_pickle=True)
-    y_train = np.load(f'data/y_train.npy',allow_pickle=True)
+    x_train = np.load(f'x_train.npy',allow_pickle=True)
+    y_train = np.load(f'y_train.npy',allow_pickle=True)
     
     classifier = LogisticRegression(max_iter=500)
-    classifier.fit(X_train,y_train)
+    classifier.fit(x_train,y_train)
     import pickle
-    with open(f'data/model.pkl', 'wb') as f:
+    with open(f'model.pkl', 'wb') as f:
         pickle.dump(classifier, f)
     
-    print("\n logistic regression classifier is trained on iris data and saved to PV location /data/model.pkl ----")
+    print("\n logistic regression classifier is trained on iris data and saved to PV location /model.pkl ----")
 
 def predict_on_test_data():
     import pandas as pd
     import numpy as np
     import pickle
     print("---- Inside predict_on_test_data component ----")
-    with open(f'data/model.pkl','rb') as f:
+    with open(f'model.pkl','rb') as f:
         logistic_reg_model = pickle.load(f)
-    X_test = np.load(f'data/X_test.npy',allow_pickle=True)
-    y_pred = logistic_reg_model.predict(X_test)
-    np.save(f'data/y_pred.npy', y_pred)
+    x_test = np.load(f'x_test.npy',allow_pickle=True)
+    y_pred = logistic_reg_model.predict(x_test)
+    np.save(f'y_pred.npy', y_pred)
     
     print("\n---- Predicted classes ----")
     print("\n")
@@ -84,11 +84,11 @@ def predict_prob_on_test_data():
     import numpy as np
     import pickle
     print("---- Inside predict_prob_on_test_data component ----")
-    with open(f'data/model.pkl','rb') as f:
+    with open(f'model.pkl','rb') as f:
         logistic_reg_model = pickle.load(f)
-    X_test = np.load(f'data/X_test.npy',allow_pickle=True)
-    y_pred_prob = logistic_reg_model.predict_proba(X_test)
-    np.save(f'data/y_pred_prob.npy', y_pred_prob)
+    x_test = np.load(f'x_test.npy',allow_pickle=True)
+    y_pred_prob = logistic_reg_model.predict_proba(x_test)
+    np.save(f'y_pred_prob.npy', y_pred_prob)
     
     print("\n---- Predicted Probabilities ----")
     print("\n")
@@ -100,56 +100,56 @@ def get_metrics():
     from sklearn.metrics import accuracy_score,precision_score,recall_score,log_loss
     from sklearn import metrics
     print("---- Inside get_metrics component ----")
-    y_test = np.load(f'data/y_test.npy',allow_pickle=True)
-    y_pred = np.load(f'data/y_pred.npy',allow_pickle=True)
-    y_pred_prob = np.load(f'data/y_pred_prob.npy',allow_pickle=True)
+    y_test = np.load(f'y_test.npy',allow_pickle=True)
+    y_pred = np.load(f'y_pred.npy',allow_pickle=True)
+    y_pred_prob = np.load(f'y_pred_prob.npy',allow_pickle=True)
     acc = accuracy_score(y_test, y_pred)
     prec = precision_score(y_test, y_pred,average='micro')
     recall = recall_score(y_test, y_pred,average='micro')
     entropy = log_loss(y_test, y_pred_prob)
     
-    y_test = np.load(f'data/y_test.npy',allow_pickle=True)
-    y_pred = np.load(f'data/y_pred.npy',allow_pickle=True)
+    y_test = np.load(f'y_test.npy',allow_pickle=True)
+    y_pred = np.load(f'y_pred.npy',allow_pickle=True)
     print(metrics.classification_report(y_test, y_pred))
     
     print("\n Model Metrics:", {'accuracy': round(acc, 2), 'precision': round(prec, 2), 'recall': round(recall, 2), 'entropy': round(entropy, 2)})
 
-DAG(
-    dag_id = "ml_pipeline_demo"
-    schedule_interval=@daily,  # No automatic scheduling
-    start_date=datetime(2024, 12, 27), 
-    catchup=False,  # Do not backfill the DAG runs
-) as dag
+with DAG(
+    dag_id="ml_pipeline_demo",
+    schedule_interval="@daily",
+    start_date=datetime(2024, 12, 27),
+    catchup=False,
+) as dag:
 
-task_prepare_data = PythonOperator(
-    task_id = 'prepare_data',
-    python_callable = prepare_data
-)
+    task_prepare_data = PythonOperator(
+        task_id='prepare_data',
+        python_callable=prepare_data
+    )
 
-task_train_test_split = PythonOperator(
-    task_id = 'train_test_split',
-    python_callable = train_test_split
-)
+    task_train_test_split = PythonOperator(
+        task_id='train_test_split',
+        python_callable=train_test_split
+    )
 
-task_training_basic_classifier = PythonOperator(
-    task_id = 'training_basic_classifier',
-    python_callable = training_basic_classifier
-)
+    task_training_basic_classifier = PythonOperator(
+        task_id='training_basic_classifier',
+        python_callable=training_basic_classifier
+    )
 
-task_predict_on_test_data = PythonOperator(
-    task_id = 'predict_on_test_data',
-    python_callable = predict_on_test_data
-)
+    task_predict_on_test_data = PythonOperator(
+        task_id='predict_on_test_data',
+        python_callable=predict_on_test_data
+    )
 
-task_predict_prob_on_test_data = PythonOperator(
-    task_id = 'predict_prob_on_test_data',
-    python_callable = predict_prob_on_test_data
-)
+    task_predict_prob_on_test_data = PythonOperator(
+        task_id='predict_prob_on_test_data',
+        python_callable=predict_prob_on_test_data
+    )
 
-task_get_metrics = PythonOperator(
-    task_id = 'get_metrics',
-    python_callable = get_metrics
-)
+    task_get_metrics = PythonOperator(
+        task_id='get_metrics',
+        python_callable=get_metrics
+    )
 
 task_prepare_data >> \
 task_train_test_split >> \
