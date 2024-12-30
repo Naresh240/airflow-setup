@@ -14,24 +14,24 @@ def build_config() -> dict[str, str]:
     """
     return dict(
         # Python settings
-        python_version="3.9",
-        python_install_dir=r"/usr/local/lib/python3.9/site-packages/",
-        python_path=r"/tmp/build-env-bv5oewis/bin/python",
+        python_version="3.12",
+        python_install_dir=r"/usr/local/lib/python3.12/site-packages/",
+        python_path=r"/tmp/build-env-y198lh52/bin/python",
 
         # Package versions
-        contourpy_version="1.3.0",
-        meson_version="1.5.1",
-        mesonpy_version="0.16.0",
-        pybind11_version="2.13.5",
+        contourpy_version="1.3.1",
+        meson_version="1.6.0",
+        mesonpy_version="0.17.1",
+        pybind11_version="2.13.6",
 
         # Misc meson settings
         meson_backend="ninja",
-        build_dir=r"/project/.mesonpy-ec_25wyo/lib/contourpy/util",
+        build_dir=r"/project/.mesonpy-ago1q5kd/lib/contourpy/util",
         source_dir=r"/project/lib/contourpy/util",
         cross_build="False",
 
         # Build options
-        build_options=r"-Dbuildtype=release -Db_ndebug=if-release -Db_vscrt=md -Dvsenv=True --native-file=/project/.mesonpy-ec_25wyo/meson-python-native-file.ini",
+        build_options=r"-Dbuildtype=release -Db_ndebug=if-release -Db_vscrt=md -Dvsenv=True --native-file=/project/.mesonpy-ago1q5kd/meson-python-native-file.ini",
         buildtype="release",
         cpp_std="c++17",
         debug="False",
