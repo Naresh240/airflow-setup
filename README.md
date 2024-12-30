@@ -18,7 +18,7 @@ please check here for [Run_MLOps_Pipeline](./mlops-pipeline/README.md) document
 
 5. Run MLFlow pipeline with airflow
 
-please check here for [ML Flow](./mlflow-with-docker-compose/README.md) document
+please check here for [ML Flow](./mlflow/README.md) document
 
 6. Setup Airflow on Minikube Cluster and also integrated dags and dependencies from Git Repo
 
