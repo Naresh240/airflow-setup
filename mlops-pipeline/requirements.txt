@@ -1,4 +1,5 @@
-pandas
-numpy
-scikit-learn
-matplotlib
+pandas==2.2.3
+numpy==2.0.2
+scikit-learn==1.6.0
+matplotlib==3.9.4
+python-dateutil<=2.8.2,>=2.1

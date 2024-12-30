@@ -1,8 +1,8 @@
-../../../bin/fonttools,sha256=tcaduLf-L2XgSZTFmeH0moWVLH8DVPeImLbtq4xKF1s,231
-../../../bin/pyftmerge,sha256=QK0qQy3DWZI9ADQwPsJxZJjp7py4NIRPcVNJV4ZcWOk,228
-../../../bin/pyftsubset,sha256=jsYmX36WceZ8qGT_0k6R-LCweFqrzjYJQpNLQBbMn5Y,229
-../../../bin/ttx,sha256=s6gTeXfSfeffjU2Pvbu4XbhiIMY1kD_d177fmrMUAts,226
-../../../share/man/man1/ttx.1,sha256=cLbm_pOOj1C76T2QXvDxzwDj9gk-GTd5RztvTMsouFw,5377
+../../bin/fonttools,sha256=KUh2ddPiCsVPO0DIujipoL8Pvymlp4af2kxg5LePnz8,217
+../../bin/pyftmerge,sha256=JLu4KjP31HEgEL0wYoZiQXPbzzcQZjAvMMlWnNudeSw,214
+../../bin/pyftsubset,sha256=npjbOBHLmqE-oudAyEuvBxV97R-qGDDS4NPGIzjJFB4,215
+../../bin/ttx,sha256=udYvuHm_76D7Q2q_TOdJQHCRWLgx38VUmDLDp4R0zcM,212
+../../share/man/man1/ttx.1,sha256=cLbm_pOOj1C76T2QXvDxzwDj9gk-GTd5RztvTMsouFw,5377
 fontTools/__init__.py,sha256=RzqvYZ4XuSVQo17n6eW2jL_XA6YjAfBybJrwLrYIOHE,183
 fontTools/__main__.py,sha256=VjkGh1UD-i1zTDA1dXo1uecSs6PxHdGQ5vlCk_mCCYs,925
 fontTools/__pycache__/__init__.cpython-39.pyc,,
