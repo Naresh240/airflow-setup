@@ -1,0 +1,33 @@
+config:
+  webserver:
+    expose_config: 'True'
+
+webserver:
+  service:
+    type: NodePort
+
+dags:
+  persistence:
+    enabled: true
+  gitSync:
+    enabled: true
+    repo: "https://github.com/Naresh240/mlops-pipeline-dags.git"
+    branch: main
+    subPath: "dags"
+
+extraVolumes:
+  - name: airflow-python-packages
+    gitRepo:
+      repository: "https://github.com/Naresh240/mlops-pipeline-dags.git"
+      revision: "main"
+      directory: "dependencies"
+
+extraVolumeMounts:
+  - name: airflow-python-packages
+    mountPath: /opt/airflow/dags/repo/dependencies
+
+extraEnv: |
+  - name: AIRFLOW__CORE__LOAD_EXAMPLES
+    value: "true"
+  - name: PYTHONPATH
+    value: /opt/airflow/dags/repo/dependencies:$PYTHONPATH
