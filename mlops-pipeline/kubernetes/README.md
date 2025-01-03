@@ -1,4 +1,4 @@
-# Airflow With Docker Compose
+# Airflow on Minikube
 
 ## Pre-Requisites:
 - Install Kubectl
